@@ -1,0 +1,36 @@
+
+\chapter{CONCLUSION AND DISCUSSION}
+
+The aim of this study was to interpret and model the changes in life expectancy in Northern Europe and the Mediterranean countries. This was done in a few chapters. 
+We started in the second chapter by considering some basic concepts and results in survival analysis and also considered parametric inference for survival data. 
+
+In the third chapter we introduced the Lexis diagram and how age, life line, period and cohort data are visualized in the diagram. We then defined and computed mortality rates for Norwegian females from the calendar year 1900 until 2014 for period data. Using those mortality rates we calculated the life expectancy at birth for some few years and observed that it has considerably increased over the past hundred years, going from 55.09 years in 1900 to 84.09 years in 2014. (See Figure \ref{fig:period life expectancy}). We also computed the life expectancy up to a certain age for different cohorts and noticed some differences with  what was obtained in the case of period data. For example, the life expectancy up to age 100 years for the cohort born in 1900 was 62.43 years. Because of the non-availability of information for the cohorts data, we computed the expected number of years lost up to a certain age for some cohorts and found out that is has decreased considerably with time. 
+
+In order to have a good representation of the historical mortality development in North-Europe and the Mediterranean, we chose in chapter 4 to focus on the life expectancy for women in Spain, Italy, Norway and Sweden. Since Spain is not available in the Human Mortality Database before the year 1908, we used data from the year 1910 to 2014 such that we could have uniform data for all the four countries. Figure \ref{fig:periodLifeExpect all} indicated that Norway and Sweden had longest life expectancy during 1910-1970, but because of an improvement of the economical and life condition in the Mediterranean, Spain and Italy became the countries with highest life expectancy from the 80s. 
+% Donner les chiffre pour 1900 et 2014 pour affirmer mes dires????
+Based on this analysis, one could conclude that women in the Mediterranean are expected to live longer than women in Scandinavia.
+
+But these results for period data correspond to an hypothetical situation, in real life women in a specific country are born in a cohort and live their lives years after years under the changing living conditions of that country. Therefore it would be accurate to compare the countries based on the cohort data. The difficulty with this approach is the non-availability of the data. To use data for a cohort, we need to know the complete mortality history of that cohort, i.e all the individuals of that cohort have to be dead. We therefore chose to compute the expected number of years lost up to a maximum age for a specific cohort. Figures \ref{fig:Number years lost max years90}, \dots, \ref{fig:Number years lost max years40 } illustrated the expected number of years lost up to ages 90, 80, 70, 60, 50 and 40 as a function of their respective cohorts. We observed that the expected number of years lost was larger in Spain and Italy for the cohort 1910. For the youngest cohorts, we observed a reduction of the gap between the two regions. Despite the considerable reduction of the expected number of years lost in the countries from the Mediterranean, all the cohorts indicated that women in Norway and Sweden are still expected to lose less years than those in Spain and Italy.
+
+To explain the difference of longevity observed in the case of period and cohort data, we introduce in chapter 5 and chapter 6 a two-points frailty distribution with the baseline death intensity of the Gompertz-Makeham form. 
+To illustrate our analysis, we grouped the countries as follow: Norway and Sweden representing group A, Spain and Italy representing group B. 
+We used information contained in table \ref{parameters_table} to plot Figures \ref{fig:hazard periodCohort and frailty},\ref{fig:Life expectCohortAB and frailty}, \ref{fig: Life expectPeriodAB and frailty}.
+Figure \ref{fig:hazard periodCohort and frailty} indicated that country B had a higher mortality at younger ages than country A. The higher mortality in country B being the result of a big number of frail individuals. The mortality in country B get relatively lower and lower with age, caused by a reduction of the average number of frail individuals. The remaining individuals in country B had a lower frailty level leading to reduction of the population hazard rates. That may be the reason country B cross over country A in the case of period data as observed in figure  \ref{fig: Life expectPeriodAB and frailty}, becoming the country with the higher life expectancy at the older ages. In the case of cohort, despite the reduction of the number of frail individuals in country B, we observed in figure \ref{fig:Life expectCohortAB and frailty} that  the life expectancy in country B increased with age but do not cross country A.
+
+Hence if we consider life  expectancy based on period mortality in figure \ref{fig: Life expectPeriodAB and frailty}, we may conclude that women in country B have higher life expectancy than those in country A. However if we consider the expected number of years lost for different cohorts in country A and B, we observed that women in country A are still expected to live longer than those in country B. 
+Naive acceptance of observed population patterns may lead to erroneous policy recommendations if an intervention depends on the response of individuals. 
+Furthermore, because patterns at the individuals level may be simpler than composite population patterns, both theoretical and empirical research may be unnecessarily complicated by failure to recognize the effects of heterogeneity.
+(\cite{VA85})
+
+
+
+
+
+
+
+
+
+
+
+
+

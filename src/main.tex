@@ -1,0 +1,39 @@
+\PassOptionsToPackage{final}{graphicx}
+\documentclass[a4paper,final]{memoir} %endre draft til final når ferdig
+\bibliographystyle{asgm}% nåååååå
+\usepackage{style}% Custom style
+\usepackage[STK, 60, UKenglish,LongTitle, web]{masterfrontpage}
+
+
+
+\title{Comparison of Cohort and Period Life Expectancy Between Countries in Scandinavia and the Mediterranean}
+\author {Joël Fomete Tankmo}
+
+
+\begin{document}
+    \masterfrontpage
+    \frontmatter        % Folios in Roman numerals, unnumbered chapters.
+
+    \include{sections/abstract}
+    \include{sections/acknowledgements}
+
+    \cleartorecto
+    \tableofcontents    % Or \tableofcontents*
+    
+    \mainmatter         % Folios in Arabic numerals, numbered chapters.
+    \include{sections/introduction}
+    \include{sections/chapter2}
+    \include{sections/chapter3}
+    \include{sections/chapter4}
+    \include{sections/chapter5}
+    \include{sections/chapter6}
+    \include{sections/conclusion} 
+   
+    \backmatter         % Folios in Arabic numerals, unnumbered chapters.
+    
+%    \appendix           % "Chapter" is renamed "Appendix"
+  
+%    \include{sections/appendix}
+
+    \printbibliography 
+\end{document}

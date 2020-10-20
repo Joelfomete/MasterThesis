@@ -1,0 +1,243 @@
+\chapter{SURVIVAL ANALYSIS BACKGROUND}
+\label{sec:second}
+
+The term survival data is commonly used to denote data that measure the time to some event. In this thesis, the event is death. The term is also used with other events, like the time to failure of a component in an unit, the occurrence of a disease or a complication. Usually to have an equal footing among the individuals, the time origin must be specified. e.g. the date of birth or the time point of diagnosis of a type of cancer. Survival data are generally described and modelled in terms of two related quantities, namely survival and hazard. (\cite{CBLA03})
+
+In the following we will consider  some basic concepts and results in the survival analysis set-up and also consider parametric inference for survival data taken from lecture notes in life history analysis by \textcite{B90}.
+ 
+\section{Basic concept and results}
+
+We consider a survival time, i.e. positive random variable $T$ with cumulative distribution function (c.d.f)
+$F(t) = P(T \leq{t} )$, 
+and the probability density function (p.d.f) $f(t) = F'(t)$.
+We usually consider the survival distribution  
+
+\begin{equation}
+  S(t) = 1 - F(t)= P(T > t ) 
+  \label{survival}
+\end{equation}
+%S(t) gives the probability of being alive just before duration t, or more generally the probability that the event of interest has not occurred by duration t.
+instead of the distribution function itself. 
+Furthermore, we introduce the death intensity, or the hazard, defined as
+
+\begin{equation}
+ \mu(t) = f(t) / S(t) 
+ \label{Hazard}
+\end{equation}
+To get an alternative, and more directly interpretable expression for $\mu(t)$, note that
+
+\begin{equation*}
+    P(t<T\leq{t+\Delta t  |  T>t}) = [S(t) - S(t + \Delta t)]/S(t).
+\end{equation*} 
+Hence using (\ref{survival}) and (\ref{Hazard}), we get \ 
+
+\begin{equation}
+\label{eq:hazard}
+\mu(t) = - S'(t)/S(t) = \displaystyle {\lim_{\Delta t \to 0} P(t<T\leq{t+\Delta t | T>t})/ \Delta t}    
+\end{equation}
+This shows that for small values of 
+$\Delta t$, $ \mu(t) \Delta t $ 
+equals approximately the probability of dying in $ (t+\Delta t] $ for an individual who is still alive at age $t$. In this respect
+$\mu( \cdot )$
+measures the instantaneous risk of dying.
+To express the survival distribution and the density in terms of the death intensity, we see that (\ref{eq:hazard}) yields
+
+\begin{equation*}
+    \mu( t ) = - \frac{d}{dt}\ln{S(t)}
+\end{equation*}
+The well known formula
+
+\begin{equation}
+  S(t) = e^{-\int_{0}^{t} \mu(v)d v }
+\end{equation}
+Differentiating (2.4) we get
+
+\begin{equation}
+    f(t) = \mu(t) e^{-\int_{0}^{t} \mu(v)d v }
+\end{equation}
+The expected life length (life expectancy at birth) is given by
+
+
+\begin{equation}
+    E[T] = \int_{0}^{\omega}tf(t)dt, 
+\end{equation}
+where $\omega$ is the highest possible age.
+Integrating by parts, and making use of the fact that $-f(t)$ is the derivative of $S(t)$, which has limits or boundary conditions $S(0)=1$ and $S(\omega)=0$ , one can show that: 
+
+
+\begin{equation}
+    E[T] = \int_{o}^{\omega}S(t)dt
+    \label{life length and survival}
+\end{equation}
+In words, the expected life length is simply the integral of the survival function. 
+We will also be interested in the expected number of years lived up to a given age $a$. 
+We introduce therefore : 
+
+\begin{equation*}
+ T_{a} = \min (T,a)   
+\end{equation*}
+and find that the expected number of years lived up to age $a$ is :
+
+
+\begin{align*}
+    E[T_{a}] &= \int_{0}^{a}tf(t)dt + a P( T > a )
+             = \int_{0}^a S(t)dt
+\end{align*}
+Finally we will also look at the expected number of years lost up to age $a$ . It is given as :
+
+\begin{equation}
+ a - E[T_{a}]   
+\end{equation}
+
+
+\section{Piece-wise constant mortality}
+
+In this section we will look specially at the situation where mortality is constant over one year intervals.
+We suppose that mortality can be given by:
+
+\begin{equation}
+\mu(t) = \sum\limits_{j=0}^{\omega-1} \mu_{j} I_{j}(t)
+\label{constant mortality}
+\end{equation}
+where $\omega$ is the highest possible age and
+
+
+\begin{equation*}
+   I_{j}(t)= 
+\left\{\begin{array}{rl}
+ 1 & \mbox{ for $ j \leq t < j + 1 $} \\
+ 0 & \mbox{ otherwise}; 
+       \end{array} \right. 
+\end{equation*}
+For $ k \leq t < k + 1 \leq \omega $ the survival function can be given as :
+
+\begin{align}
+     S(t) &= \exp({-\int_{0}^t S(u)du})
+          = \exp{(\sum\limits_{j=0}^{k-1} \mu_{j}- (t - k)\mu_{k})}
+\end{align}
+The expected life length becomes
+
+
+\begin{align*}
+    E[T] &= \int_{0}^\omega S(t)dt = \sum\limits_{k=0}^{\omega-1} \int_{k}^{k+1} S(t) dt \\
+         &= \sum\limits_{k=0}^{\omega-1} \int_{k}^{k+1}\exp{(-\sum\limits_{j=0}^{k-1}\mu_{j}-(t-k)\mu_{k})} dt\\ 
+         &= \sum\limits_{k=0}^{\omega-1}  \exp{(-\sum\limits_{j=0}^{k-1}\mu_{j})}  \exp({k\mu_{k}}) \int_{k}^{k+1}\exp{(-t\mu_{k})} dt \\
+         &= \sum\limits_{k=0}^{\omega-1}  \exp{(-\sum\limits_{j=0}^{k-1}\mu_{j})} 
+         \exp{(k\mu_{k})} \frac{1}{\mu_{k}}[-\exp{((k+1)\mu_{k})} + \exp{(-k\mu_{k})}] \\      
+         &= \sum\limits_{k=0}^{\omega-1}  \exp{(-\sum\limits_{j=0}^{k-1}\mu_{j})}  \frac{1}{\mu_{k}}(1 - \exp{(-\mu_{k})})
+\end{align*}
+When $a$ is an integer we also find that
+ 
+\begin{align*}
+    E[T_{a}] &= \int_{0}^{a} S(t) dt = \sum\limits_{k=0}^{a-1} \int_{k}^{k+1} S(t) dt \\
+              &=\sum\limits_{k=0}^{a-1}  \exp{(-\sum\limits_{j=0}^{k-1}\mu_{j})}  \frac{1}{\mu_{k}}(1 - \exp{(-\mu_{k})})
+\end{align*}
+
+
+
+\section{Maximum likelihood estimation}
+
+Suppose we have a population with $n$ individuals and that we observe the individual $i$ from the age $V_{i}$ to the age $T_{i}$. 
+Here $T_{i}$ corresponds to the time of death or censoring.
+Let $\delta_{i} = 1 $ if $T_{i}$ corresponds to the time of death and $\delta_{i} = 0 $ if it corresponds to censoring.
+We suppose that the hazard $\mu(t)$ is dependent on a vector of parameters $\bm{\theta} =(\theta_{1} ,\theta_{2} ,\dots,\theta_{p} )^T $ and write $\mu(t) = \mu(t;\bm{\theta}) $.
+We want to derive the maximum likelihood estimator (ML-estimator) for $\bm{\theta}$.
+The likelihood corresponding to individual $i$ is given as : 
+
+
+\begin{equation}
+         \Lambda_{i}(\bm{\theta}) = \mu(T_{i};\bm{\theta})^{\delta_{i}} \exp{(-\int_{V_{i}}^{T_{i}} \mu(u,\bm{\theta}) du})
+         \label{mle}
+\end{equation}
+and the total likelihood is
+
+
+\begin{equation}
+         \Lambda_{i}(\bm{\theta}) = \prod\limits_{i=1}^n \mu(T_{i};\bm{\theta})^{\delta_{i}} \exp{(-\int_{V_{i}}^{T_{i}} \mu(u,\bm{\theta})du}) 
+\end{equation}
+The ML-estimator $\hat{\bm{\theta}}$ for $\bm{\theta}$ is the value of $\bm{\theta}$ which maximizes (\ref{mle}), or equivalently maximizes
+
+
+
+\begin{equation}
+    \ln\Lambda(\bm{\theta}) = \sum\limits_{i=1}^n \delta_{i} \ln \mu(T_{i};\bm{\theta})
+    - \sum\limits_{i=1}^n \int_{V_i}^{T_i} \mu(u;\bm{\theta}) du
+    \label{MLE}
+\end{equation}
+Now $\hat{\bm{\theta}}$ is found by solving the set of equations
+
+
+\begin{equation*}
+   \frac{\partial \ln \Lambda(\bm{\theta})}{\partial\theta_{j}}
+    = 0  
+ ~~~~ j = 1,...,p;  
+\end{equation*}
+and checking that the solution of these equations yields a maximum of (\ref{MLE}).
+
+We then suppose that the mortality hazard is piece-wise constant over  one year intervals as in (\ref{constant mortality}), here we have
+${\bm{\theta}} = (\mu_{0},\mu_{1},\dots,\mu_{\omega - 1})$ .
+The part of the likelihood corresponding to individual $ i $ may now be written as 
+
+
+\begin{align*}
+   \Lambda_i = \Lambda_i (\bm{\theta})
+   &= {\mu( T_i;\bm{\theta}){^{\delta_{i}} \exp({{-\int_{V_i}^{T_i} \mu(u;\bm{\theta})du} } }}) \\
+   &= \mu_1^{D_{i0}} \mu_2^{D_{i1}} \mu_2^{D_{i2}}...\mu_{w-1}^{D_{i(w-1)}}
+   \exp({-\sum\limits_{k=0}^{w-1}  T_{ik} \mu_k }),
+\end{align*}
+where
+
+
+\begin{equation*}
+   D_{ik}= 
+\left\{\begin{array}{rl}
+ 1 & \mbox{ for~~$ k \leq T_i < k+1, ~~\delta_{i}= 1$;} \\
+ 0 & \mbox{ otherwise}; 
+       \end{array} \right. 
+\end{equation*}
+
+
+\begin{equation*}
+   T_{ik}= 
+\left\{\begin{array}{rl}
+0 & \mbox{  if~~$ V_i > k+1$ or $T_i < k  $},\\
+k+1 - V_i & \mbox{ if~~$  k \leq V_i < k+1 \leq T_i $}, \\
+T_i - V_i & \mbox{ if~~$  k \leq V_i < T_i \leq k+1 $}, \\
+T_i - k & \mbox{ if~~$    V_i< k \leq T_i < k+1 $}, \\
+1 & \mbox{ if~~$  V_i < k $ and $ T_i \geq k+i$};   
+     \end{array} \right. 
+\end{equation*}
+We see that $D_{ik}$ is the number of times we observe a death for the $i$th individual in [$k,k+1$), while $T_{ik}$ is the total time the $i$th individual is observed to live in this interval.
+
+Now the total likelihood is: 
+
+
+\begin{equation*}
+    \Lambda = \prod\limits_{i=1}^n \Lambda_i =
+    \prod\limits_{i=1}^n  [\prod\limits_{k=0}^{\omega-1} (\mu_k^{D_{ik}}) \exp{({-\sum\limits_{k=0}^{\omega -1} T_{ik}\mu_k}}) ]
+    = \prod\limits_{k=0}^{\omega -1}(\mu_k^{D_k}) 
+    \exp({{-\sum\limits_{k=0}^{\omega -1} R_k\mu_k})} ,
+\end{equation*}
+where $ D_k =\sum\limits_{i=1}^n D_{ik}$ is the observed number of deaths in $[k, k+1)$, and $R_k =\sum\limits_{i=1}^n T_{ik}$ is the total exposure in this interval. 
+
+Thus we have 
+
+
+\begin{equation*}
+    \ln\Lambda = \sum\limits_{k=0}^{\omega -1} D_k \ln\mu_k - \sum\limits_{k=0}^{\omega -1} R_{k}\mu_k,
+\end{equation*}
+and we find that
+
+\begin{equation*}
+      \frac{\partial \ln \Lambda} {\partial \mu_k} = \frac{D_k}{\mu_k} - R_k.
+\end{equation*}
+It follows that the ML-estimator for $\mu_k$ is 
+
+\begin{equation}
+    \hat{\mu}_k = \frac{D_k}{R_k}
+    \label{Mu_hat}
+\end{equation}
+i.e an occurrence/exposure rate.
+
+These concepts and results in the survival analysis and parametric inference for survival data that are presented in this chapter will be used through out the rest of the thesis. 
+In the next chapter, we will introduce the Lexis diagram and show how the mortality rates are computed from the Lexis diagram.  
